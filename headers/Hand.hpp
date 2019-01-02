@@ -32,6 +32,7 @@ public:
     Tile* third = NULL;
     MeldType type;
     void addTile(Tile*);
+    bool complete = false;
 };
 
 class Hand {
@@ -40,8 +41,10 @@ private:
     std::vector<Tile*> tiles;
     std::vector<Meld*> melds;
     std::vector<Island*> islands;
-    Tile* drawnTile = nullptr;
+    Tile* drawnTile = NULL;
     static bool compareTile(Tile*&, Tile*&);
+    int findMeldTriplet(Meld*&, int);
+    int findMeldSequence(Meld*&, int);
 
 public:
     Hand();

@@ -48,6 +48,23 @@ void Meld::addTile(Tile* newTile) {
     size++;
 }
 
+int Hand::findMeldTriplet(Meld*& meld, int indexStart) {
+
+    meld->first = tiles.at(indexStart);
+    
+    if (tiles.at(indexStart + 1)->ID == meld->first->ID) {
+        meld->second = tiles.at(indexStart + 1);
+        if (tiles.at(indexStart + 2)->ID == meld->first->ID) {
+            meld->third = tiles.at(indexStart + 2);
+            return  indexStart + 3;
+        } else {
+            return indexStart + 2;
+        }
+    } else {
+        return indexStart + 1;
+    }
+}
+
 void Hand::parseHand() {
     
     Meld* tmpMeld = new Meld();
