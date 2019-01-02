@@ -6,11 +6,40 @@
 #include <iostream>
 #include "Tile.hpp"
 
+enum MeldType {
+    pair, triplet, sequence
+};
+
+enum MissingTile {
+    sameID, leftID, middleID, rightID 
+};
+
+struct Island {
+
+public:
+    int size = 0;
+    Tile* first;
+    Tile* second = NULL;
+    MeldType type;
+    MissingTile missingTile;
+};
+
+struct Meld {
+public:
+    int size = 0;
+    Tile* first;
+    Tile* second = NULL;
+    Tile* third = NULL;
+    MeldType type;
+    void addTile(Tile*);
+};
+
 class Hand {
 
 private:
-public:
     std::vector<Tile*> tiles;
+    std::vector<Meld*> melds;
+    std::vector<Island*> islands;
     Tile* drawnTile = nullptr;
     static bool compareTile(Tile*&, Tile*&);
 
@@ -19,6 +48,7 @@ public:
     ~Hand();
     void drawHand(std::vector<Tile*>& wall);
     void draw(std::vector<Tile*>& wall);
+    void parseHand();
     void print();
 };
 

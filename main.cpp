@@ -66,6 +66,10 @@ int main () {
     hand->draw(wall);
     hand->print();
 
+    std::cout << std::endl << "> Parse Islands : " << std::endl << std::endl;
+    hand->parseHand();
+    std::cout << std::endl;
+
     for( Tile* tile : wall ) {
         delete tile;
     }
