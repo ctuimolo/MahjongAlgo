@@ -26,6 +26,7 @@ enum Type {
 class Tile {
 
 private:
+public:
     std::string SuitStrings[4] =
         { "-none-", "man", "pin", "sou" };
     std::string NumValueStrings[10] = 
@@ -44,8 +45,9 @@ private:
     WindValue windValue;
 
 public:
-    Tile(int _ID);
+    Tile(int _ID = 0);
     std::string toString();
+    void print();
 };
 
 #endif
