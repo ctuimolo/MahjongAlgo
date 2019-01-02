@@ -39,12 +39,13 @@ class Hand {
 
 private:
     std::vector<Tile*> tiles;
+    std::vector< std::vector< Meld* > > allMelds;
     std::vector<Meld*> melds;
     std::vector<Island*> islands;
     Tile* drawnTile = NULL;
     static bool compareTile(Tile*&, Tile*&);
-    int findMeldTriplet(Meld*&, int);
-    int findMeldSequence(Meld*&, int);
+    void findMeldTriplet(std::vector<Meld*>&, int);
+    void findMeldSequence(std::vector<Meld*>&, int);
 
 public:
     Hand();

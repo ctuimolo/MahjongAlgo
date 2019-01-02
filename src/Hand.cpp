@@ -48,26 +48,51 @@ void Meld::addTile(Tile* newTile) {
     size++;
 }
 
-int Hand::findMeldTriplet(Meld*& meld, int indexStart) {
+void Hand::findMeldTriplet(std::vector<Meld*>& melds, int indexStart) {
 
+    Meld* meld = new Meld();
     meld->first = tiles.at(indexStart);
     
-    if (tiles.at(indexStart + 1)->ID == meld->first->ID) {
+    if ( indexStart <= 11 && tiles.at(indexStart + 1)->ID == meld->first->ID) {
         meld->second = tiles.at(indexStart + 1);
-        if (tiles.at(indexStart + 2)->ID == meld->first->ID) {
+        if ( indexStart <= 10 && tiles.at(indexStart + 2)->ID == meld->first->ID) {
             meld->third = tiles.at(indexStart + 2);
-            return  indexStart + 3;
-        } else {
-            return indexStart + 2;
+            melds.push_back(meld);
+            if(indexStart + 3 < 13) {
+                findMeldTriplet(melds, indexStart + 3);
+                return;
+            }
+            return;
+        } 
+        melds.push_back(meld);
+        if(indexStart + 2 < 13) {
+            findMeldTriplet(melds, indexStart + 2);
+            return;
         }
-    } else {
-        return indexStart + 1;
+        return;
+    } 
+    melds.push_back(meld);
+    if(indexStart + 1 < 13) {
+        findMeldTriplet(melds, indexStart + 1);
+        return;
     }
+    return;
 }
 
 void Hand::parseHand() {
     
-    Meld* tmpMeld = new Meld();
+    // RECURSIVE CALL
+    findMeldTriplet(melds, 0);
+    
+    for ( Meld* meld : melds ) {
+        meld->first->print();
+        if(meld->second != NULL) meld->second->print();
+        if(meld->third!= NULL) meld->third->print();
+        std::cout << " ";
+    }
+
+    // PROCEDURAL CALL
+    /*Meld* tmpMeld = new Meld();
 
     for( int i = 0; i < 13; i++ ) {
 
@@ -98,7 +123,7 @@ void Hand::parseHand() {
         if(meld->third!= NULL) meld->third->print();
         std::cout << " ";
     }
-
+    */
 }
 
 void Hand::print() {
