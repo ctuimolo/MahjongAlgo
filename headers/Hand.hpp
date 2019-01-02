@@ -12,6 +12,7 @@ private:
 public:
     std::vector<Tile*> tiles;
     Tile* drawnTile = nullptr;
+    static bool compareTile(Tile*&, Tile*&);
 
 public:
     Hand();
