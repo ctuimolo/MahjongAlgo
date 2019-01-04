@@ -46,6 +46,7 @@ private:
     static bool compareTile(Tile*&, Tile*&);
     void findMeldTriplet(std::vector<Meld*>&, int);
     void findMeldSequence(std::vector<Meld*>&, int);
+    int findFirstDifferent();
 
 public:
     Hand();
